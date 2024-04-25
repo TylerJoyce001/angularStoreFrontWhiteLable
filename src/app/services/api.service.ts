@@ -12,4 +12,12 @@ export class ApiService {
   get<T>(url: string, options: Options): Observable<T> {
     return this.httpClient.get<T>(url, options) as Observable<T>;
   }
+
+  post<T>(url: string, options: Options): Observable<T> {
+    return this.httpClient.post<T>(url, options) as Observable<T>;
+  }
+
+  delete<T>(url: string, options: Options): Observable<T> {
+    return this.httpClient.delete<T>(url, options) as Observable<T>;
+  }
 }
