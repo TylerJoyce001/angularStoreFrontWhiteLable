@@ -21,9 +21,11 @@
     [totalRecords]="totalRecords"
     [rowsPerPageOptions]="[5, 10, 20]"
     (onPageChange)="onPageChange($event)"
+    #paginator
   >
   </p-paginator>
 
+  <!-- Display is double binding -->
   <app-edit-popup
     [product]="selectedProduct"
     [(display)]="displayEditPopup"
@@ -32,8 +34,8 @@
   >
   </app-edit-popup>
 
+  <!-- Display is double binding -->
   <app-edit-popup
-    [product]="selectedProduct"
     [(display)]="displayAddPopup"
     (confirm)="onConfirmAdd($event)"
     header="Add Product"
