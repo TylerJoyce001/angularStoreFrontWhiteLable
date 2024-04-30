@@ -48,7 +48,7 @@ export class EditPopupComponent {
   }
 
   productForm = this.formBuilder.group({
-    name: ['', [Validators.required]],
+    name: ['', [Validators.required, this.specialCharacterValidator()]],
     image: [''],
     price: ['', [Validators.required]],
     rating: [0],
@@ -65,5 +65,9 @@ export class EditPopupComponent {
   onCancel() {
     this.display = false;
     this.displayChange.emit(this.display);
+  }
+
+  ngOnInit() {
+    this.productForm.patchValue(this.product);
   }
 }
