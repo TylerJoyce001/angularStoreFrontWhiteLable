@@ -33,6 +33,13 @@ export class ProductComponent {
     this.edit.emit(this.product);
   }
 
+  truncateName(name: string) {
+    if (name && name.length > 20) {
+      return name.slice(0, 20) + '...';
+    }
+    return name;
+  }
+
   confirmDelete() {
     this.confirmationService.confirm({
       target: this.deleteButton.nativeElement,

@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { Product } from '../../../types';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
 
@@ -20,6 +25,8 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './edit-popup.component.scss',
 })
 export class EditPopupComponent {
+  constructor(private formBuilder: FormBuilder) {}
+
   @Input() display: boolean = false;
   @Output() displayChange = new EventEmitter<boolean>();
   @Input() header!: string;
@@ -31,7 +38,23 @@ export class EditPopupComponent {
     rating: 0,
   };
 
-  @Output() confirm = new EventEmitter<any>();
+  specialCharacterValidator(): ValidatorFn {
+    return (control) => {
+      const hasSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(
+        control.value
+      );
+      return hasSpecialCharacter ? { hasSpecialCharacter: true } : null;
+    };
+  }
+
+  productForm = this.formBuilder.group({
+    name: ['', [Validators.required]],
+    image: [''],
+    price: ['', [Validators.required]],
+    rating: [0],
+  });
+
+  @Output() confirm = new EventEmitter<Product>();
 
   onConfirm() {
     this.confirm.emit(this.product);
