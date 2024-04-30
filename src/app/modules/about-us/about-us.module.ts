@@ -5,10 +5,9 @@ import { AboutUsRoutingModule } from './about-us-routing.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
-  declarations: [
-    AboutUsComponent
-  ],
+  declarations: [AboutUsComponent],
   imports: [CommonModule, AboutUsRoutingModule],
   exports: [],
+  providers: [],
 })
 export class AboutUsModule {}
